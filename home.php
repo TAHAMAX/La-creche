@@ -1,40 +1,10 @@
- <!DOCTYPE html>
-<html>
-<head>
-	<title>La creche</title>
-    <html lang="en">
-    <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="include/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="include/style/style.css">
-   </head>
-<body class=" ">
-
-
-    
-<div class="container">
-    <!-- Navigation -->
-	<div>
-	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	      <div class="container">
-	       	        <a href="http://localhost/Natif_la_Creche/index.php">
-	        <img   src="include/style/logo.png" class="img-fluid" alt="Responsive image" width="100px">
-	        </a>
-	        <div class="collapse navbar-collapse" id="navbarResponsive">
-	          <ul class="navbar-nav ml-auto">
-	            <li class="nav-item">
-	              <div class="btn-group-vertical">
-	                	<a href="#" class="btn btn-danger btn-lg" role="button"  >Sign out</a>  
-	              </div>
-	          </ul>
-	        </div>
-
-	      </div>
-	    </nav>
-	</div>
+ <?php 
+ 	require_once 'include/header.php';
+ ?>
+ 
 
 	 <!-- main -->
-	<main>
+	<main style="margin-top: 120px">
 		<table class="table table-bordered   bodytop">
 		  <thead>
 		    <tr>
@@ -45,105 +15,66 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr> 
-		      <td>
-		      		<ul class="list-group  " role="tablist">
-					  <li class="list-group-item list-group-item-action">name</li>
-					  <li class="list-group-item list-group-item-action">Dname</li>
-					  <li class="list-group-item list-group-item-action">name</li>
-					  <li class="list-group-item list-group-item-action">name</li>
-					  <li class="list-group-item list-group-item-action">name</li>
-					</ul>
+     <tr> 
+      <td>
+        <form action="home.php" method="POST">
+      		<ul class="list-group  " role="tablist">
+			       <li class="list-group-item btn-primary active text-center font-weight-bold">name</li>	
+					<?php 
+					require_once 'include/connectsql.php';
+					$data = $conn->query('SELECT * FROM  children');
+					while ($key = $data->fetch())
+					{
+					echo '
+<button  id='.$key["children_id"].'  class="list-group-item text-center font-weight-bold" value='.$key["children_id"].' name="editt" type="editt">'.$key["children_firstname"]. '</button>';
+					} 
+					$data->closeCursor();
+					?>
+			</ul>
+		</form>
+      </td>
+      <td>
+	<?php 
+			require_once 'include/connectsql.php';
+			$id=$_POST['editt'];
+			$data = $conn->query('SELECT * FROM children WHERE children_id= '.$id);
+			$show = $data->fetch();
+             echo '
+<div class="input-group mb-2">
+<div class="input-group-prepend">
+<span class="input-group-text"  >firstname :</span>
+</div>
+<div class="alert alert-success form-control" role="alert"  >'.$show["children_firstname"].'</div>
+</div>
+<div class="input-group mb-2">
+<div class="input-group-prepend">
+<span class="input-group-text"  >lastname :</span>
+</div>
+<div class="alert alert-success form-control" role="alert"  >'.$show["children_lastname"].'</div>
+</div>
+<div class="input-group mb-2">
+<div class="input-group-prepend">
+<span class="input-group-text"  >birthday :</span>
+</div>
+<div class="alert alert-success form-control" role="alert"  >'.$show["children_birthday"].'</div>
+</div> 
+<div class="input-group mb-2">
+<div class="input-group-prepend">
+<span class="input-group-text"  >Parents contact :</span></div>
+<div class="alert alert-success form-control" role="alert" >'.$show["children_adress"].'</div>
+</div>  
+<div class="input-group mb-2">
+<div class="input-group-prepend">
+<span class="input-group-text"  >Remarks :</span></div>
+<div class="alert alert-success form-control" role="alert" >'.$show["children_remarks"].'</div>
+</div>  
+			';$data->closeCursor();
+	      ?>		 	 	 	 			
 		      </td>
-		      <td>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >First name :</span>
-						</div>
-							<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
- 
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Last name :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-
-			 		<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Birth date :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Address :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Contact Mother :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Contact Father :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >N ° of room :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-
-						<div class="input-group-prepend">
-							<span class="input-group-text"  > N ° of bed :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Date of reception :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Next date of reception :</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >Note</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"  >History of the activities</span>
-						</div>
-						<div class="alert alert-success form-control" role="alert" name="" id="">nome prenom</div>
-					</div>
-		      </td>
-		    </tr>
-		     
+		    </tr>		   
 		  </tbody>
 		</table>	
 	</main>
-</div>
-
- <!-- Footer -->
-<footer class="py-5 bg-dark">
-  <div class=" ">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-  </div> -->
-  <!-- /.container -->
-</footer> 
-
-	<script type="text/javascript" src="include/jquery.min.js"></script>
-	<script type="text/javascript" src="include/bootstrap.min.js"></script>
-	<script type="text/javascript" src="include/js/app.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  ></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  ></script>
- </body>
-</html>
+  <?php 
+ 	require_once 'include/footer.php';
+ ?>

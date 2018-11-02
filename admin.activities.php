@@ -1,158 +1,116 @@
- <!DOCTYPE html>
-<html>
-<head>
-	<title>La creche</title>
-    <html lang="en">
-    <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="include/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="include/style/style.css">
-   </head>
-<body class=" ">
-
-
-    
-<div class="container">
-    <!-- Navigation -->
-	<div>
-	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	      <div class="container">
-	        <!--<a class="navbar-brand" href="#">logo</a>--> 	
-	        <a href="http://localhost/Natif_la_Creche/index.php">
-	        <img   src="include/style/logo.png" class="img-fluid" alt="Responsive image" width="100px">
-	        </a>	        <div class="collapse navbar-collapse" id="navbarResponsive">
-	          <ul class="navbar-nav ml-auto">
-	            <li class="nav-item">
-	              <div class="btn-group-vertical">
-	                	<a href="#" class="btn btn-danger btn-lg" role="button"  >Sign out</a>  
-	              </div>
-	          </ul>
-	        </div>
-
-	      </div>
-	    </nav>
+ 
+<?php 
+ 	require_once 'include/header.php';
+ ?>
+ 
+<div class="row " style="margin-top: 120px">
+	<div class="col">
+		<a href="http://localhost/Natif_la_Creche/admin.children.php" type="button" class="btn btn-primary btn-lg btn-block font-weight-bold">List of the childrens	</a>    
 	</div>
-		<div class="bodytop">
-			<div class="input-group mb-2">
-				<a href="http://localhost/Natif_la_Creche/admin.children.php" type="button" class="form-control btn btn-danger btn-lg">The list of children</a>
-				<a href="http://localhost/Natif_la_Creche/admin.activities.php" type="button" class="form-control btn btn-primary btn-lg btn-block">All the activities</a>
+	<div class="col">
+		<a href="http://localhost/Natif_la_Creche/admin.activities.php" type="button" class="btn btn-primary btn-lg btn-block font-weight-bold">List of the activities</a>    
+	</div>
+</div>
+<div class="row" style="margin-top: 5px">
+	<div class="col-sm">
+		<a class="btn btn-primary btn-lg btn-block font-weight-bold bg-success alert-primary" data-toggle="modal" data-target="#Create">Create new activities</a>	 
+	</div>
+</div>
 
-			</div>
+<main style="margin-top: 5px">
+	<div class="list-group  ">
+ 		<div class="row " style="margin-top: 5px">
+ 			<i class="col list-group-item   btn-primary active text-center font-weight-bold">Name</i>
+			<i class="col list-group-item   btn-primary active text-center font-weight-bold">Type</i>
+			<i class="col list-group-item   btn-primary active text-center font-weight-bold">Numbe</i>
+		   	<i class="col  col-lg-1 fa fa-edit list-group-item   bg-success  active text-center font-weight-bold	alert-primary"></i>
+		    <i class="col  col-lg-1 fa fa-trash list-group-item   bg-danger active  text-center font-weight-bold	alert-primary"></i>    
 		</div>
-	 <!-- main -->
-	<main>
-		<table class="table table-bordered    ">
-		  <thead>
-		    <tr>
-		     
-		      <th class="  active" scope="col">All the activities</th>
-		      <th class=" active" scope="col">The details</th>
-		      
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr> 
-		      <td>
-		      		<ul class="list-group  " role="tablist">
-					  <li class="list-group-item list-group-item-action">name</li>
-					  <li class="list-group-item list-group-item-action">Dname</li>
-					  <li class="list-group-item list-group-item-action">name</li>
-					  <li class="list-group-item list-group-item-action">name</li>
-					  <li class="list-group-item list-group-item-action">name</li>
-					</ul>
-		      </td>
-		      <td>
+		<?php 
+			    require_once 'include/connectsql.php';
+		        $data = $conn->query('SELECT * FROM  activity');
+		        while ($key = $data->fetch())
+		        {
+		           echo '
+<div class="row ">
+		<i class="col list-group-item text-center font-weight-bold ">'.$key["activity_name"].'</i>
+	<i class="col list-group-item text-center font-weight-bold">'.$key["activity_type"].'</i>
+	<i class="col list-group-item text-center font-weight-bold">'.$key["activity_number_max_child"].'</i>
+
+ <form  class="col col-lg-1 btn btn-success">
+<a id='.$key["activity_id"].'   value='.$key["activity_id"].' data-toggle="modal" data-target="#exampleModal">
+ 	<i class="  fa fa-edit   "></i> 
+ </a>
+ </form>
+
+ <form action="include/delet.php" method="POST" class="col col-lg-1 btn btn-danger">
+<button id='.$key["activity_id"].'  name="DeleteActivities" type="DeleteActivities" value='.$key["activity_id"].'>
+	<i class="  fa fa-trash   "></i> 
+</button>
+</form>
+</div>
+		           ';
+		        } 
+		        $data->closeCursor();
+		 ?>	
+		  
+	</div>
+</main >
+ <!-- End main -->
+
+<!-- Modal insert-->
+<form action="include/insert.php" method="POST">
+<div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create new	activitie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		 
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<span class="input-group-text"  >Name :</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Name" name="" id="">
+						<input type="text" class="form-control"   name="ActivitieName"  >
  					</div>
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<span class="input-group-text"  >Type :</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Type" name="" id="">
+						<input type="text" class="form-control"   name="ActivitieType"  >
 					</div>
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<span class="input-group-text"  >Number of children allowed :</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Number of children allowed	" name="" id="">
-					</div>
- 
-     
-     
-		      </td>
-		    </tr>
-		     
-		  </tbody>
-		</table>
-		<div class="input-group mb-3">
-            <a   type=" " class="form-control btn btn-danger btn-lg btn-block">Create new file</a>
-			<a   type=" " class="form-control btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#Modify"">Modify the file</a>
-			<a   type=" " class="form-control btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#Delete"">Delete the file</a>
+						<input type="text" class="form-control"   name="NChildrenAllowed"  >
+					</div>  
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<span class="input-group-text"  >fk_children :</span>
+						</div>
+						<input type="text" class="form-control"   name="fk_children"  >
+					</div>      
 		</div>
- 	</main>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="Modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modify</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        are u sure do you want to Modify
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button  type="SaveActivitie" name="SaveActivitie" class="btn btn-primary">Save  </button>
       </div>
     </div>
   </div>
 </div>
+</form>
+	
+<!-- Modal Edite-->
 
-<div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        are u sure do you want to Delete
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<?php 
+ 	require_once 'include/footer.php';
+ ?>
 
 
- <!-- Footer -->
-<footer class="py-5 bg-dark">
-  <div class=" ">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-  </div> -->
-  <!-- /.container -->
-</footer> 
-
-	<script type="text/javascript" src="include/jquery.min.js"></script>
-	<script type="text/javascript" src="include/bootstrap.min.js"></script>
-	<script type="text/javascript" src="include/js/app.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  ></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  ></script>
- </body>
-</html>
-
+ 
 

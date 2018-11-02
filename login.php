@@ -1,56 +1,25 @@
- <!DOCTYPE html>
-<html>
-<head>
-	<title>La creche</title>
-    <html lang="en">
-    <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="include/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="include/style/style.css">
-   </head>
-<body class=" ">
-  
-	<div class="container">
-	    <!-- Navigation -->
-		<div>
-		    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		      <div class="container">
-		        <!--<a class="navbar-brand" href="#">logo</a>--> 	
-		        <img src="include/style/logo.png" class="img-fluid" alt="Responsive image" width="100px">
-		        <div class="collapse navbar-collapse" id="navbarResponsive">
-		          <ul class="navbar-nav ml-auto">
-		            <li class="nav-item">
-		              <div class="btn-group-vertical">
-		                	<a href="#" class="btn btn-danger btn-lg" role="button"  >Sign out</a>  
-		              </div>
-		          </ul>
-		        </div>
-
-		      </div>
-		    </nav>
-		</div>
+ <?php 
+ 	require_once 'include/header.php';
+ ?>
 		 <!-- main -->
-		<main class="bodytop ">
-			<div class="btn-group-vertical my_centered_buttons">
-				<button href="#" type="button" class="btn btn-primary btn-lg btn-block    ">Block level button</button>
-				<button href="#" type="button" class="btn btn-success btn-lg btn-block    ">Block level button</button>
-				<button href="#" type="button" class="btn btn-warning btn-lg btn-block  ">Block level button</button>
-			</div>
-	    </main>
-	</div>
-
-	 <!-- Footer -->
-	<footer class="py-5 bg-dark">
-	  <div class=" ">
-	    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-	  </div> -->
-	  <!-- /.container -->
-	</footer> 
-
-	<script type="text/javascript" src="include/jquery.min.js"></script>
-	<script type="text/javascript" src="include/bootstrap.min.js"></script>
-	<script type="text/javascript" src="include/js/app.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  ></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  ></script>
- </body>
-</html>
+<main style="margin-top: 120px" class="align-text-bottom">
+ 		<div class="col-md-4 center">
+			<h2 class="text-center">Login Now</h2>
+			<form class="">
+				<div class="form-group">
+					<label for="exampleInputEmail1" class="text-uppercase">Username</label>
+					<input type="text" class="form-control" placeholder="">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1" class="text-uppercase">Password</label>
+					<input type="password" class="form-control" placeholder="">
+				</div>	
+				<div class="form-check">
+					<a href="http://localhost/Natif_la_Creche/index.php"	 type="submit" class="btn btn-primary btn-login float-right">Submit</a>
+ 				</div>
+			</form>
+		</div>
+ </main>
+ <?php 
+ 	require_once 'include/footer.php';
+ ?>
